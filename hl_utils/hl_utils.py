@@ -1,3 +1,5 @@
+import json
+
 from web_fragments.fragment import Fragment
 
 from xblockutils.resources import ResourceLoader
@@ -30,31 +32,28 @@ class StudioModalFixMixin(object):
         return fragment
 
 
-class HLXblockModalHelperMixin(object):
+class HLXBlockModalHelperMixin(object):
     """
         mixin to add modal tab definitions with associated templates
         to studio fragments
     """
 
+    modal_tabs = []
+
     def get_modal_tabs(self):
-        """
-            expected to return list of tuples with
-                - tab_display_name
-                - rendered template
-                - list of script/style resources (maybe?)
-
-            :return:
-        """
-
-        return []
+        return self.modal_tabs
 
     def studio_view(self, context):
 
         context = context or {}
-        context['modal_tabs'] = self.get_modal_tabs()
+        context['modal_tabs'] = json.dumps(self.get_modal_tabs())
+        context['num_tabs'] = len(self.get_modal_tabs())
+        # fragment = super(HLXBlockModalHelperMixin, self).studio_view(context)
 
-        fragment = super(HLXblockModalHelperMixin, self).studio_view(context)
+        fragment = Fragment()
 
         # add additional scripts/styling resources
+        fragment.add_javascript(loader.load_unicode('static/js/hl_utils-cms.js'))
+        fragment.add_css(loader.load_unicode('static/css/modal-styling.css'))
 
         return fragment

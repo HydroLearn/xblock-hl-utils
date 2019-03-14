@@ -39,7 +39,7 @@ setup(
         'hl_utils',
     ],
     install_requires=PREREQs,
-    package_data=package_data("hl_learning_objs",
+    package_data=package_data("hl_utils",
                               [
                                     "static",
                                     "public",
