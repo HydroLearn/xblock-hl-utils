@@ -21,7 +21,7 @@ def package_data(pkg, roots):
 
 
 # Constants #########################################################
-VERSION = '0.1.1'
+VERSION = '1.0.0'
 
 # xblocks  #########################################################
 PREREQs = [
@@ -31,7 +31,7 @@ PREREQs = [
 ]
 
 setup(
-    name='xblock-hl_utils',
+    name='hl-xblock-utils',
     version=VERSION,
     author="cRivet",
     description='various utilities for hydrolearn xblocks.',
